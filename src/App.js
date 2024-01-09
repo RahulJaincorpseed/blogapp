@@ -7,6 +7,7 @@ import { getAllTickets } from "./redux/slices/ticket"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import AllTickets from "./tickets/AllTickets"
 import AddTicket from "./tickets/AddTicket"
+import SingleTicket from "./tickets/SingleTicket"
 
 const MyComponent = React.lazy(() => import("./component/MyComponent"))
 
@@ -31,6 +32,7 @@ function App() {
         <Routes>
           <Route path="/allticket"  element={<AllTickets />} />
           <Route path="/addticket"  element={<AddTicket />} />
+          <Route path="/ticket/:ticketId"  element={<SingleTicket />} />
         </Routes>
       </BrowserRouter>
       {/* <h4>{count}</h4>
