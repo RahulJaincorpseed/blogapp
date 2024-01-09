@@ -1,32 +1,34 @@
-import React, { useEffect } from "react"
-import { useParams } from "react-router"
-import { getSingleTicket } from "../redux/slices/ticket"
-import { useDispatch, useSelector } from "react-redux"
+import React, { useEffect } from "react";
+import { useParams } from "react-router";
+import { getSingleTicket } from "../redux/slices/ticket";
+import { useDispatch, useSelector } from "react-redux";
 
 const SingleTicket = () => {
-  const { ticketId } = useParams()
 
-  const singleTicket = useSelector((state) => state.ticket.singleProduct)
+    const {ticketId} = useParams();
 
-  console.log("i am sinlg e ticket", singleTicket)
+    const singleTicket = useSelector((state) => (state.ticket.singleProduct));
 
-  const { data: singleTicketData } = singleTicket
+    console.log("i am sinlg e ticket", singleTicket);
 
-  const dispatch = useDispatch()
-  console.log(ticketId)
+    const {data: singleTicketData} = singleTicket;
 
-  useEffect(() => {
-    dispatch(getSingleTicket(ticketId))
-  }, [])
+    const dispatch = useDispatch();
+    console.log(ticketId);
+
+    useEffect(() => {
+        dispatch(getSingleTicket(ticketId))
+    },[])
+
 
   return (
     <div>
-      <p>Sinlge Ticket</p>
-      <p>ID: {singleTicketData.id}</p>
-      <p>Subject: {singleTicketData.subject}</p>
-      <p>Description: {singleTicketData.description}</p>
+        <p>Sinlge Ticket</p>
+        <p>ID: {singleTicketData?.id}</p>
+        <p>Subject: {singleTicketData?.subject}</p>
+        <p>Description: {singleTicketData?.description}</p>
     </div>
   )
-}
+};
 
-export default SingleTicket
+export default SingleTicket;
