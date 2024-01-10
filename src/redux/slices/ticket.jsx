@@ -16,18 +16,21 @@ export const addNewTicketData = createAsyncThunk("addTicket", async (data) => {
   return myNewTicket
 })
 
-
-export const deleteNewTicketData = createAsyncThunk("deleteTicket", async (id) => {
-    const myNewTicket = await deleteQuery(`/api/auth/user/deleteTicket?id=${id}`)
+export const deleteNewTicketData = createAsyncThunk(
+  "deleteTicket",
+  async (id) => {
+    const myNewTicket = await deleteQuery(
+      `/api/auth/user/deleteTicket?id=${id}`
+    )
     return myNewTicket
-  })
+  }
+)
 
-  
 export const getSingleTicket = createAsyncThunk("singleTicket", async (id) => {
-    console.log("i am, calling.....");
-    const myNewTicket = await getQuery(`/api/auth/user/ticket?id=${id}`)
-    return myNewTicket
-  })
+  console.log("i am, calling.....")
+  const myNewTicket = await getQuery(`/api/auth/user/ticket?id=${id}`)
+  return myNewTicket
+})
 
 //   ttp://localhost:8081/api/auth/user/ticket?id=2
 
@@ -35,15 +38,15 @@ const ticketSlice = createSlice({
   name: "ticket",
   initialState: {
     isLoading: false,
+    isCreateLoad: false,
+    isCreateError: false,
     data: [],
     isError: false,
     delete: false,
     singleProduct: {},
   },
   extraReducers: (builder) => {
-    builder.addCase(deleteNewTicketData.fulfilled, (state, action) => {
-        state.delete = action.payload
-      })
+    // get all ticket cases
     builder.addCase(getAllTickets.pending, (state, action) => {
       state.isLoading = true
     })
@@ -55,15 +58,37 @@ const ticketSlice = createSlice({
       state.isError = true
       console.log("Error", state, action.payload)
     })
+    //  Add New ticket cases
+    builder.addCase(addNewTicketData.pending, (state, action) => {
+      state.isCreateLoad = true
+    })
     builder.addCase(addNewTicketData.fulfilled, (state, action) => {
+      state.isCreateLoad = false
       state = { ...state, data: action.payload }
     })
+    builder.addCase(addNewTicketData.rejected, (state, action) => {
+      state.isCreateError = true
+      state.isCreateLoad = false
+      console.log("Error", state)
+    })
+    // Delete New Ticket
+    builder.addCase(deleteNewTicketData.pending, (state, action) => {
+      state.delete = true
+    })
+
+    builder.addCase(deleteNewTicketData.fulfilled, (state, action) => {
+      state.delete = false
+    })
+
+    builder.addCase(deleteNewTicketData.rejected, (state, action) => {
+      state.delete = false
+      console.log(action.payload);
+    })
+
     builder.addCase(getSingleTicket.fulfilled, (state, action) => {
-        state.singleProduct = action.payload
-      })
+      state.singleProduct = action.payload
+    })
   },
 })
 
 export default ticketSlice.reducer
-
-

@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import Input from "../component/Input"
 import Button from "../component/Button"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { addNewTicketData } from "../redux/slices/ticket"
 import { useNavigate } from "react-router"
 
@@ -13,6 +13,9 @@ const AddTicket = () => {
 
   const navigate  = useNavigate()
 
+  const {isCreateLoad} = useSelector((prev) => (prev?.ticket))
+
+  // console.log("loading ticket", addTicketLoad);
   const dispatch = useDispatch()
 
   const newTicketAdd = (e) => {
@@ -42,7 +45,7 @@ const AddTicket = () => {
           placeholder="Enter Description"
           onChange={(e) => newTicketAdd(e)}
         />
-        <Button onClick={(e) => addNewTicketFun(e)} data="Add New Tickets" />
+        <Button onClick={(e) => addNewTicketFun(e)} data={isCreateLoad ? "Loading...." : "Add New Tickets"} />
       </form>
     </div>
   )
