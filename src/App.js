@@ -8,6 +8,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import AllTickets from "./tickets/AllTickets"
 import AddTicket from "./tickets/AddTicket"
 import SingleTicket from "./tickets/SingleTicket"
+import AddNewData from "./query/AddNewData"
+import AllData from "./query/AllData"
 
 const MyComponent = React.lazy(() => import("./component/MyComponent"))
 
@@ -30,6 +32,9 @@ function App() {
           <Route path="/allticket"  element={<AllTickets />} />
           <Route path="/addticket"  element={<AddTicket />} />
           <Route path="/ticket/:ticketId"  element={<SingleTicket />} />
+          <Route path="/adddata"  element={<AddNewData />} />
+          <Route path="/alldata"  element={<AllData />} />
+          
         </Routes>
       </BrowserRouter>
       {/* <h4>{count}</h4>
