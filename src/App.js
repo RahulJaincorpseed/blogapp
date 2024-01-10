@@ -15,10 +15,7 @@ function App() {
   const [count, setCount] = useState(0)
   const countValue = useSelector((data) => data.counter)
   const ticketValue = useSelector((data) => data.ticket)
-
-  useEffect(() => {
-    dispatch(getAllTickets())
-  }, [])
+ 
 
   const dispatch = useDispatch()
 
