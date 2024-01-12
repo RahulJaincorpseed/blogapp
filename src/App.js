@@ -15,7 +15,6 @@ function App() {
   const [count, setCount] = useState(0)
   const countValue = useSelector((data) => data.counter)
   const ticketValue = useSelector((data) => data.ticket)
- 
 
   const dispatch = useDispatch()
 
@@ -27,9 +26,9 @@ function App() {
       <h1>Main Page </h1>
       <BrowserRouter>
         <Routes>
-          <Route path="/allticket"  element={<AllTickets />} />
-          <Route path="/addticket"  element={<AddTicket />} />
-          <Route path="/ticket/:ticketId"  element={<SingleTicket />} />
+          <Route path="/allticket" element={<AllTickets />} />
+          <Route path="/addticket" element={<AddTicket />} />
+          <Route path="/ticket/:ticketId" element={<SingleTicket />} />
         </Routes>
       </BrowserRouter>
       {/* <h4>{count}</h4>
